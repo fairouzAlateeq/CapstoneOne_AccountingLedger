@@ -157,6 +157,26 @@ public class Main {
                 System.out.println("0. Back");
                 reportsCommand = intScanny.nextInt();
                 switch(reportsCommand){
+                    case 1:
+                        monthToDate();
+                        break;
+                    case 2:
+                        previousMonth();
+                        break;
+                    case 3:
+                        yearToDate();
+                        break;
+                    case 4:
+                        previousYear();
+                        break;
+                    case 5:
+                        searchByVendor();
+                        break;
+                    case 0:
+                        reports();
+                        break;
+                    default:
+                        System.out.println("Please pick a nummberrrr bruh");
 
                 }
 
@@ -170,6 +190,42 @@ public class Main {
 
 
     }
+
+    public static void monthToDate(){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
+        System.out.println("Month-to-Date:");
+        System.out.println("Start of the month: " + firstDayOfMonth);
+        System.out.println("Current date: " + currentDate);
+    }
+    public static void previousMonth(){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate previousMonthDate = currentDate.minusMonths(1);
+        System.out.println("Previous Month:");
+        System.out.println(previousMonthDate.getMonth());
+
+
+    }
+    public static void yearToDate(){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate firstDayOfYear = currentDate.withDayOfYear(1);
+        System.out.println("Year-to-Date:");
+        System.out.println("Start of the year: " + firstDayOfYear);
+        System.out.println("Current date: " + currentDate);
+    }
+    public static void previousYear(){
+        LocalDate currentDate = LocalDate.now();
+        LocalDate previousYear = currentDate.minusYears(1);
+        System.out.println("Previous Year:");
+        System.out.println(previousYear.getYear());
+
+
+    }
+    public static void searchByVendor(){
+        //for everyitem compare to user input
+
+    }
+
 
 
     }
