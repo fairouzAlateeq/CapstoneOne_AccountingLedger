@@ -1,33 +1,38 @@
 package com.ps;
-import java.util.Scanner;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
+
+import java.time.LocalTime;
 
 public class Ledger {
-    LocalDateTime date;
-    LocalDateTime time;
+    LocalDate date;
+    LocalTime time;
+    String description;
     String vendor;
     float amount;
 
-    public Ledger(LocalDateTime date, LocalDateTime time, String vendor, float amount) {
+    public Ledger(LocalDate date, LocalTime time, String description, String vendor, float amount) {
         this.date = date;
         this.time = time;
+        this.description = description;
         this.vendor = vendor;
         this.amount = amount;
     }
 
-    public LocalDateTime getDate() {
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public LocalDateTime getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 
@@ -45,5 +50,13 @@ public class Ledger {
 
     public void setAmount(float amount) {
         this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
