@@ -32,15 +32,11 @@ public class Main {
                 Ledger ledger = new Ledger(date, time, description, vendor, amount);
                      //   transactions.length ;
                // transactionData[nextEmptyIndex] = String.valueOf(ledger);
-                if (nextEmptyIndex < transactions.size()) {
-                    transactions.add(ledger);
-                    nextEmptyIndex++;
-                } else {
-                    System.out.println("Transaction array is full!");
-                    break;
-                }
+
+               transactions.add(ledger);
 
             }
+            bfr.close();
             do {
                 System.out.println("1. Add deposit");
                 System.out.println("2. Make payment (debit)");
@@ -68,7 +64,7 @@ public class Main {
             }
 
                 while (mainMenuChoice != 4) ;
-            bfr.close();
+
 
             } catch(Exception e){
                 e.printStackTrace();
@@ -101,13 +97,8 @@ public class Main {
                         newAmount
                 ));
                 Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
-                int nextEmptyIndex =0;
-                if (nextEmptyIndex < transactions.size()) {
                     transactions.add(newTransaction);
-                    nextEmptyIndex++;
-                } else {
-                    System.out.println("Transaction array is full!");
-                }
+
 
                 bfw.close();
 
@@ -131,15 +122,27 @@ public class Main {
             //prompt the user for amount
             System.out.println("How much is the payment?");
             float newAmount = intScanny.nextFloat();
-            // write them into the file
-            Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
-            int nextEmptyIndex =0;
-            if (nextEmptyIndex < transactions.size()) {
+
+            try {
+                BufferedWriter bfw = new BufferedWriter(new FileWriter("transactions.csv", true));
+                bfw.write(String.format("\n%s|%s|%s|%s|%.2f",
+                        currentDate,
+                        currentTime,
+                        newDescrption,
+                        vendorName,
+                        newAmount
+                ));
+                Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
                 transactions.add(newTransaction);
-                nextEmptyIndex++;
-            } else {
-                System.out.println("Transaction array is full!");
+
+
+                bfw.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+
 
 
         }
@@ -246,7 +249,7 @@ public class Main {
         LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
 
         for (Ledger ledger: transactions) {
-            if (ledger != null && ledger.getDate().isBefore(currentDate) && ledger.getDate().isAfter(currentDate))
+            if ((ledger.getDate().equals(currentDate) || ledger.getDate().isBefore(currentDate)) && (ledger.getDate().isAfter(firstDayOfMonth) || ledger.getDate().equals(firstDayOfMonth)))
                 System.out.println(ledger.toString());
         }
 
@@ -257,8 +260,8 @@ public class Main {
         LocalDate firstDayOfPreviousMonth = previousMonthDate.withDayOfMonth(1);
         LocalDate lastDayOfPreviousMonth = previousMonthDate.withDayOfMonth(previousMonthDate.lengthOfMonth());
         for (Ledger ledger: transactions) {
-            if (ledger != null && ledger.getDate().isAfter(firstDayOfPreviousMonth) && ledger.getDate().isBefore(lastDayOfPreviousMonth))
-                System.out.println(ledger.toString());
+            if ((ledger.getDate().isEqual(firstDayOfPreviousMonth) || ledger.getDate().isAfter(firstDayOfPreviousMonth)) && (ledger.getDate().isEqual(lastDayOfPreviousMonth) ||ledger.getDate().isBefore(lastDayOfPreviousMonth)))
+                System.out.println(ledger);
         }
 
 
@@ -267,7 +270,7 @@ public class Main {
         LocalDate currentDate = LocalDate.now();
         LocalDate firstDayOfYear = currentDate.withDayOfYear(1);
         for (Ledger ledger: transactions) {
-            if (ledger != null && ledger.getDate().isAfter(firstDayOfYear) && ledger.getDate().isBefore(currentDate))
+            if ((ledger.getDate().equals(currentDate) || ledger.getDate().isBefore(currentDate)) && (ledger.getDate().isAfter(firstDayOfYear) || ledger.getDate().equals(firstDayOfYear)))
                 System.out.println(ledger.toString());
         }
     }
@@ -276,12 +279,13 @@ public class Main {
         LocalDate previousYear = currentDate.minusYears(1);
         LocalDate firstDayOfPreviousYear = previousYear.withDayOfYear(1);
         LocalDate lastDayOfPreviousYear = previousYear.withDayOfYear(previousYear.lengthOfYear());
-        for (Ledger ledger: transactions) {
-            if (ledger != null && ledger.getDate().isAfter(firstDayOfPreviousYear) && ledger.getDate().isBefore(lastDayOfPreviousYear))
-                System.out.println(ledger.toString());
+        for (Ledger ledger : transactions) {
+            if (ledger != null &&
+                    (ledger.getDate().isAfter(firstDayOfPreviousYear) || ledger.getDate().isEqual(firstDayOfPreviousYear)) &&
+                    (ledger.getDate().isBefore(lastDayOfPreviousYear) || ledger.getDate().isEqual(lastDayOfPreviousYear)))
+                System.out.println(ledger);
+
         }
-
-
     }
     public static void searchByVendor(){
         //for everyitem compare to user input
@@ -292,13 +296,12 @@ public class Main {
         for (Ledger ledger: transactions) {
             if (ledger != null && ledger.getVendor().equalsIgnoreCase(V))
             {
-                System.out.println(ledger.toString());
+                System.out.println(ledger);
             }
 
         }
 
     }
-
 
 
     }
