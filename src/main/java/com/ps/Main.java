@@ -1,10 +1,7 @@
 package com.ps;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.BufferedWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 public class Main {
@@ -77,7 +74,7 @@ public class Main {
             }
 
         }
-        public static void addDeposit() {
+        public static void addDeposit() throws IOException {
             // get now date, get now time
             LocalDateTime currentDateTime = LocalDateTime.now();
             LocalDate date = currentDateTime.toLocalDate();
@@ -93,6 +90,9 @@ public class Main {
             System.out.println("How much is the deposit?");
             float newAmount = intScanny.nextFloat();
             // write them into the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true));
+            Ledger newTransaction = new Ledger(date, time, newDescrption, vendorName, newAmount);
+
         }
         public static void makePayment () {
             // get now date, get now time
@@ -247,11 +247,10 @@ public class Main {
         String V = stringScanny.nextLine();
 
         for (Ledger ledger: transactions) {
-            if (ledger != null && ledger.getVendor().equalsIgnoreCase(V));
+            if (ledger != null && ledger.getVendor().equalsIgnoreCase(V))
             {
-                System.out.println(ledger);
+                System.out.println(ledger.toString());
             }
-
 
         }
 
