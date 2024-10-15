@@ -18,21 +18,30 @@ public class Main {
         int mainMenuChoice;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("transactions.csv"));
-            String header = br.readLine();
+            BufferedReader bfr = new BufferedReader(new FileReader("transactions.csv"));
+            String header = bfr.readLine();
             String input;
-            while ((input = br.readLine()) != null) {
-                System.out.println(input);
-                String[] transactions = input.split("\\|");
+            int nextEmptyIndex = 0;
+            while ((input = bfr.readLine()) != null) {
+                // System.out.println(input);
+                String[] transactionData = input.split("\\|");
                 // System.out.println(Arrays.toString(candy));
-                LocalDate date = LocalDate.parse(transactions[0]);
-                LocalTime time = LocalTime.parse(transactions[1]);
-                String description = transactions[2];
-                String vendor = transactions[3];
-                float amount = Float.parseFloat(transactions[4]);
+                LocalDate date = LocalDate.parse(transactionData[0]);
+                LocalTime time = LocalTime.parse(transactionData[1]);
+                String description = transactionData[2];
+                String vendor = transactionData[3];
+                float amount = Float.parseFloat(transactionData[4]);
                 Ledger ledger = new Ledger(date, time, description, vendor, amount);
-                int nextEmptyIndex = transactions.length - 1;
-                transactions[nextEmptyIndex] = String.valueOf(ledger);
+                     //   transactions.length ;
+               // transactionData[nextEmptyIndex] = String.valueOf(ledger);
+                if (nextEmptyIndex < transactions.length) {
+                    transactions[nextEmptyIndex] = ledger;
+                    nextEmptyIndex++;  // Increment the index for the next transaction
+                } else {
+                    System.out.println("Transaction array is full!");
+                    break;
+                }
+
             }
             do {
                 System.out.println("1. Add deposit");
@@ -57,10 +66,11 @@ public class Main {
                     default:
                         System.out.println("Please choose a number between 1 and 4.");
                 }
+
             }
 
                 while (mainMenuChoice != 4) ;
-
+            bfr.close();
 
             } catch(Exception e){
                 e.printStackTrace();
@@ -140,9 +150,18 @@ public class Main {
         }
 
     public static void displayAll(){
+        for (Ledger ledger: transactions) {
+            if (ledger != null)
+                System.out.println(ledger.toString());
+        }
+
 
     }
     public static void displayPayments(){
+        for (Ledger ledger: transactions) {
+            if (ledger != null && ledger.getAmount() < 0)
+                System.out.println(ledger.toString());
+        }
 
     }
     public static void reports() {
@@ -223,6 +242,18 @@ public class Main {
     }
     public static void searchByVendor(){
         //for everyitem compare to user input
+        //tolowercase.equals
+        System.out.println("which vendor are you looking for?");
+        String V = stringScanny.nextLine();
+
+        for (Ledger ledger: transactions) {
+            if (ledger != null && ledger.getVendor().equalsIgnoreCase(V));
+            {
+                System.out.println(ledger);
+            }
+
+
+        }
 
     }
 

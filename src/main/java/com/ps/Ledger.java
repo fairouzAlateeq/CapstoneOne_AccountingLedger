@@ -59,4 +59,15 @@ public class Ledger {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Ledger{" +
+                "date=" + date +
+                ", time=" + time +
+                ", description='" + description + '\'' +
+                ", vendor='" + vendor + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }
