@@ -33,7 +33,7 @@ public class Main {
                // transactionData[nextEmptyIndex] = String.valueOf(ledger);
                 if (nextEmptyIndex < transactions.length) {
                     transactions[nextEmptyIndex] = ledger;
-                    nextEmptyIndex++;  // Increment the index for the next transaction
+                    nextEmptyIndex++;
                 } else {
                     System.out.println("Transaction array is full!");
                     break;
@@ -77,8 +77,8 @@ public class Main {
         public static void addDeposit() throws IOException {
             // get now date, get now time
             LocalDateTime currentDateTime = LocalDateTime.now();
-            LocalDate date = currentDateTime.toLocalDate();
-            LocalTime time = currentDateTime.toLocalTime();
+            LocalDate currentDate = currentDateTime.toLocalDate();
+            LocalTime currentTime = currentDateTime.toLocalTime();
 
             // get Descrption
             System.out.println("Describe");
@@ -90,15 +90,37 @@ public class Main {
             System.out.println("How much is the deposit?");
             float newAmount = intScanny.nextFloat();
             // write them into the file
-            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true));
-            Ledger newTransaction = new Ledger(date, time, newDescrption, vendorName, newAmount);
+            try {
+                BufferedWriter bfw = new BufferedWriter(new FileWriter("transactions.csv", true));
+                bfw.write(String.format("\n%s|%s|%s|%s|%.2f",
+                     currentDate,
+                     currentTime,
+                        newDescrption,
+                        vendorName,
+                        newAmount
+                ));
+                Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
+                int nextEmptyIndex =0;
+                if (nextEmptyIndex < transactions.length) {
+                    transactions[nextEmptyIndex] = newTransaction;
+                    nextEmptyIndex++;
+                } else {
+                    System.out.println("Transaction array is full!");
+                }
+
+                bfw.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }
         public static void makePayment () {
             // get now date, get now time
             LocalDateTime currentDateTime = LocalDateTime.now();
-            LocalDate date = currentDateTime.toLocalDate();
-            LocalTime time = currentDateTime.toLocalTime();
+            LocalDate currentDate = currentDateTime.toLocalDate();
+            LocalTime currentTime = currentDateTime.toLocalTime();
             // get Descrption
             System.out.println("Describe");
             String newDescrption = stringScanny.nextLine();
@@ -109,6 +131,14 @@ public class Main {
             System.out.println("How much is the payment?");
             float newAmount = intScanny.nextFloat();
             // write them into the file
+            Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
+            int nextEmptyIndex =0;
+            if (nextEmptyIndex < transactions.length) {
+                transactions[nextEmptyIndex] = newTransaction;
+                nextEmptyIndex++;
+            } else {
+                System.out.println("Transaction array is full!");
+            }
 
 
         }
