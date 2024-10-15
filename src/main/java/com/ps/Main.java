@@ -4,12 +4,13 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 public class Main {
     static Scanner intScanny = new Scanner(System.in);
     static Scanner stringScanny = new Scanner(System.in);
 
     // an array for products
-    static Ledger[] transactions = new Ledger[100];
+    static ArrayList<Ledger> transactions = new ArrayList<>();
 
     public static void main(String[] args) {
         int mainMenuChoice;
@@ -31,8 +32,8 @@ public class Main {
                 Ledger ledger = new Ledger(date, time, description, vendor, amount);
                      //   transactions.length ;
                // transactionData[nextEmptyIndex] = String.valueOf(ledger);
-                if (nextEmptyIndex < transactions.length) {
-                    transactions[nextEmptyIndex] = ledger;
+                if (nextEmptyIndex < transactions.size()) {
+                    transactions.add(ledger);
                     nextEmptyIndex++;
                 } else {
                     System.out.println("Transaction array is full!");
@@ -101,8 +102,8 @@ public class Main {
                 ));
                 Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
                 int nextEmptyIndex =0;
-                if (nextEmptyIndex < transactions.length) {
-                    transactions[nextEmptyIndex] = newTransaction;
+                if (nextEmptyIndex < transactions.size()) {
+                    transactions.add(newTransaction);
                     nextEmptyIndex++;
                 } else {
                     System.out.println("Transaction array is full!");
@@ -133,8 +134,8 @@ public class Main {
             // write them into the file
             Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
             int nextEmptyIndex =0;
-            if (nextEmptyIndex < transactions.length) {
-                transactions[nextEmptyIndex] = newTransaction;
+            if (nextEmptyIndex < transactions.size()) {
+                transactions.add(newTransaction);
                 nextEmptyIndex++;
             } else {
                 System.out.println("Transaction array is full!");
@@ -243,30 +244,42 @@ public class Main {
     public static void monthToDate(){
         LocalDate currentDate = LocalDate.now();
         LocalDate firstDayOfMonth = currentDate.withDayOfMonth(1);
-        System.out.println("Month-to-Date:");
-        System.out.println("Start of the month: " + firstDayOfMonth);
-        System.out.println("Current date: " + currentDate);
+
+        for (Ledger ledger: transactions) {
+            if (ledger != null && ledger.getDate().isBefore(currentDate) && ledger.getDate().isAfter(currentDate))
+                System.out.println(ledger.toString());
+        }
+
     }
     public static void previousMonth(){
         LocalDate currentDate = LocalDate.now();
         LocalDate previousMonthDate = currentDate.minusMonths(1);
-        System.out.println("Previous Month:");
-        System.out.println(previousMonthDate.getMonth());
+        LocalDate firstDayOfPreviousMonth = previousMonthDate.withDayOfMonth(1);
+        LocalDate lastDayOfPreviousMonth = previousMonthDate.withDayOfMonth(previousMonthDate.lengthOfMonth());
+        for (Ledger ledger: transactions) {
+            if (ledger != null && ledger.getDate().isAfter(firstDayOfPreviousMonth) && ledger.getDate().isBefore(lastDayOfPreviousMonth))
+                System.out.println(ledger.toString());
+        }
 
 
     }
     public static void yearToDate(){
         LocalDate currentDate = LocalDate.now();
         LocalDate firstDayOfYear = currentDate.withDayOfYear(1);
-        System.out.println("Year-to-Date:");
-        System.out.println("Start of the year: " + firstDayOfYear);
-        System.out.println("Current date: " + currentDate);
+        for (Ledger ledger: transactions) {
+            if (ledger != null && ledger.getDate().isAfter(firstDayOfYear) && ledger.getDate().isBefore(currentDate))
+                System.out.println(ledger.toString());
+        }
     }
     public static void previousYear(){
         LocalDate currentDate = LocalDate.now();
         LocalDate previousYear = currentDate.minusYears(1);
-        System.out.println("Previous Year:");
-        System.out.println(previousYear.getYear());
+        LocalDate firstDayOfPreviousYear = previousYear.withDayOfYear(1);
+        LocalDate lastDayOfPreviousYear = previousYear.withDayOfYear(previousYear.lengthOfYear());
+        for (Ledger ledger: transactions) {
+            if (ledger != null && ledger.getDate().isAfter(firstDayOfPreviousYear) && ledger.getDate().isBefore(lastDayOfPreviousYear))
+                System.out.println(ledger.toString());
+        }
 
 
     }
