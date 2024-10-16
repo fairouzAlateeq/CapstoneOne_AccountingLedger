@@ -8,4 +8,4 @@
 
 
 
-![Project Logo](images/El-Qadi.png)
+![Project Logo](images/Logo.png)
