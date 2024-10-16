@@ -30,9 +30,8 @@ public class Main {
                 String vendor = transactionData[3];
                 float amount = Float.parseFloat(transactionData[4]);
                 Ledger ledger = new Ledger(date, time, description, vendor, amount);
-                     //   transactions.length ;
+               //   transactions.length ;
                // transactionData[nextEmptyIndex] = String.valueOf(ledger);
-
                transactions.add(ledger);
 
             }
@@ -62,9 +61,7 @@ public class Main {
                 }
 
             }
-
                 while (mainMenuChoice != 4) ;
-
 
             } catch(Exception e){
                 e.printStackTrace();
@@ -120,7 +117,7 @@ public class Main {
             System.out.println("Whats the vendors name?");
             String vendorName = stringScanny.nextLine();
             //prompt the user for amount
-            System.out.println("How much is the payment?");
+            System.out.println("How much is the payment? -no negatives-");
             float newAmount = intScanny.nextFloat();
 
             try {
@@ -130,7 +127,7 @@ public class Main {
                         currentTime,
                         newDescrption,
                         vendorName,
-                        newAmount
+                        newAmount *= -1 // now it saves it to a nagative amount even if the user didn't put it hehe
                 ));
                 Ledger newTransaction = new Ledger(currentDate, currentTime, newDescrption, vendorName, newAmount);
                 transactions.add(newTransaction);
@@ -186,7 +183,7 @@ public class Main {
     public static void displayAll(){
         for (Ledger ledger: transactions) {
             if (ledger != null)
-                System.out.println(ledger.toString());
+                System.out.println(ledger);
         }
 
 
