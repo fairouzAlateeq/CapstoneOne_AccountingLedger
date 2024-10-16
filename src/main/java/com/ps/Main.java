@@ -207,6 +207,8 @@ public class Main {
                 System.out.println("3. Year to date");
                 System.out.println("4. Previous Year");
                 System.out.println("5. search by vendor");
+                System.out.println("6. search ny amount");
+                System.out.println("7. search by specific date");
                 System.out.println("0. Back");
                 reportsCommand = intScanny.nextInt();
                 switch(reportsCommand){
@@ -224,6 +226,12 @@ public class Main {
                         break;
                     case 5:
                         searchByVendor();
+                        break;
+                    case 6:
+                        searchByAmount();
+                        break;
+                    case 7:
+                        searchByDate();
                         break;
                     case 0:
                         reports();
@@ -271,7 +279,7 @@ public class Main {
         LocalDate firstDayOfYear = currentDate.withDayOfYear(1);
         for (Ledger ledger: transactions) {
             if ((ledger.getDate().equals(currentDate) || ledger.getDate().isBefore(currentDate)) && (ledger.getDate().isAfter(firstDayOfYear) || ledger.getDate().equals(firstDayOfYear)))
-                System.out.println(ledger.toString());
+                System.out.println(ledger);
         }
     }
     public static void previousYear(){
@@ -302,6 +310,32 @@ public class Main {
         }
 
     }
+    public static void searchByAmount(){
+        System.out.println("Enter amount ");
+        float comparisonAmount = intScanny.nextFloat();
+        float tolerance = 0.01f;
 
+        for (Ledger ledger: transactions) {
+            if (ledger != null && ledger.getAmount() == comparisonAmount)
+            {
+                System.out.println(ledger);
+            }
+
+        }
+
+    }
+    public static void searchByDate(){
+        System.out.println("what dat are you looking for? yyyy-mm-dd");
+        String userDate = stringScanny.nextLine();
+        for (Ledger ledger: transactions) {
+            String ledgerDate = ledger.getDate().toString();
+            if (ledger != null && ledgerDate.equals(userDate))
+            {
+                System.out.println(ledger);
+            }
+
+        }
+
+    }
 
     }
