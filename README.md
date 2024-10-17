@@ -18,4 +18,4 @@ Now we will view the main screens of this project.
 ## Reports Menu
 ![Reports Menu](images/ReportsScreen.png)
 
-<img src="images/Logo.png" width =150px height=150px align="center">
+<img src="images/Logo.png" width =150px height=150px style="margin:100px">
