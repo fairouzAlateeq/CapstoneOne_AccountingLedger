@@ -9,6 +9,8 @@ Now we will view the main screens of this project.
 ## Home Screen
 ![Main Menu Screen](images/MainMenuScreen.png)
 
+   <p> This is the first menu the user sees when they start the program </p>
+
 ## Deposit/Payment 
 ![Deposit/Payment](images/DepositScreen.png)
 
