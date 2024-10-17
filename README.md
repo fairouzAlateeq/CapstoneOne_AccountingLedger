@@ -46,9 +46,15 @@ the displayment of all transactions, payments only or reports which is demonstra
 ## Reports Menu
 ![Reports Menu](images/ReportsScreen.png)
 
-<p> The reports menu has displayment abilities beyond just the depositis and payments.
+The reports menu has displayment abilities beyond just the depositis and payments.
 <br> 
-
-</p>
+<ul>
+<li> Month to date displays all transactions from the beginning for the month </li>
+<li> Previous Month displays all transactions from the previous month </li>
+<li> Year to date displays all transactions from the beginning for the year </li>
+<li> Previous Year displays all transactions from the previous year </li>
+<li> search by vendor allows you to enter the name of the vendor then displays all transaction to and from that vendor </li>
+<li>search by specific date will display all transactions happened that day </li>
+</ul>
 
 <img src="images/Logo.png" width =150px height=150px style="margin:100px">

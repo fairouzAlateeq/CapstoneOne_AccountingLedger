@@ -289,7 +289,6 @@ public class Main {
                     (ledger.getDate().isAfter(firstDayOfPreviousYear) || ledger.getDate().isEqual(firstDayOfPreviousYear)) &&
                     (ledger.getDate().isBefore(lastDayOfPreviousYear) || ledger.getDate().isEqual(lastDayOfPreviousYear)))
                 System.out.println(ledger);
-
         }
     }
     public static void searchByVendor(){
