@@ -57,4 +57,22 @@ The reports menu has displayment abilities beyond just the depositis and payment
 <li>search by specific date will display all transactions happened that day </li>
 </ul>
 
+<h4> Here are the outputs for some of the methods </h4>
+
+<h6> DisplayAll Sample </h6>
+
+![Display All Sample](images/DisplayAllSampleCode.png)
+
+<h6> Display Payments Sample </h6>
+
+![Display Payments Sample](images/PaymentsSampleCode.png)
+
+<h6> Previous Month Sample </h6>
+
+![Previous Month Sample](images/PreviousMonthSampleCode.png)
+
+<h6> Search By Amount Sample </h6>
+
+![Search By Amount Sample](images/SearchByAmountSampleCode.png)
+
 <img src="images/Logo.png" width =150px height=150px style="margin:100px">
