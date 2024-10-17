@@ -22,6 +22,9 @@ enter the amount
 <p> for payment however as the following piece of code demonstrates;
 the amount is going to be multiplied by minus one for it to be saved 
 into the transaction file as a payment.
+
+</p>
+
 ``` java
 bfw.write(String.format("\n%s|%s|%s|%s|%.2f",
                         currentDate,
@@ -30,10 +33,10 @@ bfw.write(String.format("\n%s|%s|%s|%s|%.2f",
                         vendorName,
                         newAmount *= -1 // now it saves it to a nagative amount even if the user didn't put it hehe
                 ));
-</p>
-
+```
 ## Ledger Menu
 ![Ledger Menu](images/LedgerMenu.png)
+
 
 <p> 
 the Ledger holds all the display properties starting with
