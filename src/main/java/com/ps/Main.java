@@ -231,11 +231,10 @@ public class Main {
                         searchByDate();
                         break;
                     case 0:
-                        reports();
+                        displayLedger();
                         break;
                     default:
                         System.out.println("Please pick a nummberrrr bruh");
-
                 }
 
             }
@@ -245,7 +244,6 @@ public class Main {
         catch(Exception e){
             e.printStackTrace();
         }
-
 
     }
 
@@ -257,8 +255,8 @@ public class Main {
             if ((ledger.getDate().equals(currentDate) || ledger.getDate().isBefore(currentDate)) && (ledger.getDate().isAfter(firstDayOfMonth) || ledger.getDate().equals(firstDayOfMonth)))
                 System.out.println(ledger.toString());
         }
-
     }
+
     public static void previousMonth(){
         LocalDate currentDate = LocalDate.now();
         LocalDate previousMonthDate = currentDate.minusMonths(1);
@@ -268,9 +266,8 @@ public class Main {
             if ((ledger.getDate().isEqual(firstDayOfPreviousMonth) || ledger.getDate().isAfter(firstDayOfPreviousMonth)) && (ledger.getDate().isEqual(lastDayOfPreviousMonth) ||ledger.getDate().isBefore(lastDayOfPreviousMonth)))
                 System.out.println(ledger);
         }
-
-
     }
+
     public static void yearToDate(){
         LocalDate currentDate = LocalDate.now();
         LocalDate firstDayOfYear = currentDate.withDayOfYear(1);
@@ -279,6 +276,7 @@ public class Main {
                 System.out.println(ledger);
         }
     }
+
     public static void previousYear(){
         LocalDate currentDate = LocalDate.now();
         LocalDate previousYear = currentDate.minusYears(1);
@@ -291,6 +289,7 @@ public class Main {
                 System.out.println(ledger);
         }
     }
+
     public static void searchByVendor(){
         //for everyitem compare to user input
         //tolowercase.equals
@@ -302,10 +301,9 @@ public class Main {
             {
                 System.out.println(ledger);
             }
-
         }
-
     }
+
     public static void searchByAmount(){
         System.out.println("Enter amount ");
         float comparisonAmount = intScanny.nextFloat();
@@ -316,10 +314,9 @@ public class Main {
             {
                 System.out.println(ledger);
             }
-
         }
-
     }
+
     public static void searchByDate(){
         System.out.println("what dat are you looking for? yyyy-mm-dd");
         String userDate = stringScanny.nextLine();
@@ -329,9 +326,6 @@ public class Main {
             {
                 System.out.println(ledger);
             }
-
         }
-
     }
-
     }
